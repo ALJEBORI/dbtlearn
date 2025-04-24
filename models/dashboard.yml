@@ -1,0 +1,17 @@
+version: 2
+
+exposures:
+  - name: Executive Dashboard
+    type: dashboard
+    maturity: low
+    url:  https://55b73772.us1a.app.preset.io/superset/explore/p/rg7mX8oLWqZ/
+    description: Executive Dashboard about Airbnb listings and hosts
+
+    
+    depends_on:
+      - ref('dim_listings_w_hosts')
+      - ref('mart_fulmoon_reviews')
+
+    owner:
+      name: Mohammed ALjeboei
+      email: moh_aljebori@yahoo.com
