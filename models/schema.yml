@@ -40,7 +40,6 @@ models:
     tests:
       - accepted_values:
           values: [ 'Entire home/apt', 'Private room', 'Shared room', 'Hotel room' ]
-
   - name: minimum_nights
     description: '{{ doc("dim_listing_cleansed__minimum_nights") }}'
     tests:
@@ -83,7 +82,6 @@ models:
               max_value: 5000
               config:
                 severity: warn
-
   - name: fct_reviews
     columns:
       - name: listing_id
