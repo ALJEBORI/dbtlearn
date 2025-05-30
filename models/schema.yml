@@ -12,8 +12,10 @@ models:
         data_type: number
       - name: listing_name
         data_type: varchar
+        description: The 'listing_name' column represents the name of the listing on Airbnb. It is a string data type and is derived from the 'NAME' column in the 'raw_listings' table in the 'AIRBNB' database.
       - name: room_type
         data_type: varchar
+        description: The type of room that is listed for rent. This is a categorical variable with values such as 'Private Room', 'Entire Home/Apt', etc.
       - name: minimum_nights
         description: |-
           Minimum number of nights required to rent this property.
@@ -22,12 +24,16 @@ models:
         data_type: number
       - name: host_id
         data_type: number
+        description: This is a numeric identifier for the host of the listing. It is unique for each host.
       - name: price
         data_type: number
+        description: This column represents the price of the listing. It is derived from the 'price_str' column in the raw data, with the '$' symbol removed and the value converted to a decimal format.
       - name: created_at
         data_type: timestamp_ntz
+        description: The timestamp when the listing was first created. The data type is timestamp_ntz, which means it's a timestamp without a timezone.
       - name: updated_at
         data_type: timestamp_ntz
+        description: This column represents the timestamp when the listing was last updated. The data type is timestamp_ntz, which stands for timestamp with no timezone. This means that the timestamp is stored without any timezone information. It is important to note that the timezone of the timestamp will depend on the timezone setting of the database session.
   - name: host_id
     description: primary key for host table
     tests:
@@ -75,7 +81,7 @@ models:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: number
           - dbt_expectations.expect_column_quantile_values_to_be_between:
-              quantile: .99
+              quantile: 0.99
               min_value: 50
               max_value: 500
           - dbt_expectations.expect_column_max_to_be_between:
@@ -93,8 +99,8 @@ models:
       - name: reviewer_name
         tests:
           - not_null
-      
+
       - name: review_sentiment
         tests:
           - accepted_values:
-              values: ['positive', 'neutral', 'negative']
+              values: [ 'positive', 'neutral', 'negative' ]
