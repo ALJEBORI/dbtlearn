@@ -104,3 +104,25 @@ models:
         tests:
           - accepted_values:
               values: [ 'positive', 'neutral', 'negative' ]
+  - name: mart_fulmoon_reviews
+    description: The mart_fulmoon_reviews model combines Airbnb review data with full moon dates to determine whether each review occurred during a full moon or not. It enriches the review data by adding a new column, 'is_full_moon', which indicates 'full moon' if the review date matches the day after a full moon date, and 'not full moon' otherwise.
+    columns:
+      - name: review_id
+        data_type: varchar
+      - name: listing_id
+        data_type: number
+      - name: review_date
+        data_type: timestamp_ntz
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: month
+              interval: 3
+              row_condition: review_id IS NOT NULL
+      - name: reviewer_name
+        data_type: varchar
+      - name: review_text
+        data_type: varchar
+      - name: review_sentiment
+        data_type: varchar
+      - name: is_full_moon
+        data_type: varchar
